@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as service;
+import 'package:get/instance_manager.dart';
+import 'package:get/route_manager.dart';
 import 'package:medical_app/pages/homepage.dart';
 
 void main() {
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Medical App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

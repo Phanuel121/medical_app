@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
+import 'package:medical_app/modal/doctors_info.dart';
 import 'package:medical_app/service/styles.dart';
 
 class HomePage extends StatelessWidget {
@@ -245,27 +246,51 @@ class HomePage extends StatelessWidget {
             right: 0,
             left: 0,
             child: SizedBox(
-              height: 173,
+              height: 180,
               width: Get.width,
               child: ListView.builder(
                 itemCount: 4,
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.only(left: 20),
                 itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.only(right: 15),
-                    height: 140,
-                    width: 140,
-                    decoration: BoxDecoration(
-                      color: Colors.blueGrey,
-                      image: const DecorationImage(
-                        image: AssetImage("images/doctor1.jpeg"),
-                        scale: 2,
-                        fit: BoxFit.cover,
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(right: 15),
+                        height: 140,
+                        width: 140,
+                        decoration: BoxDecoration(
+                          color: Colors.blueGrey,
+                          image: DecorationImage(
+                            image: AssetImage("images/${doctor.map((e) => e.photo).toList().elementAt(index)}"),
+                            scale: 2,
+                            fit: BoxFit.cover,
+                          ),
+                          border: Border.all(color: white, width: 2),
+                          borderRadius: BorderRadius.circular(20)
+                        ),
                       ),
-                      border: Border.all(color: white, width: 2),
-                      borderRadius: BorderRadius.circular(20)
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          doctor.map((e) => e.name).toList().elementAt(index),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          doctor.map((e) => e.specialty).toList().elementAt(index),
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ),
+                    ],
                   );
                 },
               ),

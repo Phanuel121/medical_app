@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as service;
-import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
-import 'package:medical_app/pages/homepage.dart';
+import 'package:medical_app/pages/navigation_pages.dart';
+import 'package:provider/provider.dart';
+
+import 'service/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   service.SystemChrome.setPreferredOrientations([service.DeviceOrientation.portraitUp]);
   service.SystemChrome.setEnabledSystemUIMode(service.SystemUiMode.immersiveSticky);
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<StateManager>(
+          create: (context) => StateManager(),
+        ),
+      ], 
+      child: const MyApp(),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -19,12 +30,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Medical App',
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const NavigationPages(),
     );
   }
 }
